@@ -1,0 +1,1859 @@
+
+
+\documentclass[11pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools,dsfont,bm}
+\usepackage{slashed}
+\usepackage{esint}
+\mathtoolsset{showonlyrefs}
+
+% \usepackage{refcheck}
+\usepackage{graphicx}
+% \setlength{\textwidth}{145mm}
+% \usepackage{fullpage}
+%\usepackage{showkeys}
+\usepackage{color}
+% \usepackage{hyperref}
+\usepackage{wasysym}
+
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{Corollary}{Corollary}[section]
+\newtheorem*{AssA}{Assumption A}
+\newtheorem*{AssB}{Assumption B}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{Example}{Example}[section]
+\newtheorem*{ack}{Acknowledgments}
+\newtheorem{remark}{Remark}[section]
+\newtheorem{claim}{Claim}[section]
+
+
+\theoremstyle{definition}
+\newtheorem{Definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{notation}{Notation}
+\newtheorem{assum}{Assumption}
+
+\numberwithin{equation}{section}
+
+\newcommand{\vertiii}[1]{
+  {\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert
+  #1
+  \right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}
+}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\C}{{\mathbb C}}
+\newcommand{\N}{{\mathbb N}}
+\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\OO}{\mathcal{O}}
+\definecolor{blu}{rgb}{0,0,1}
+\newcommand{\pt}{\partial}
+\newcommand{\DD}{\Delta}
+\newcommand{\hD}{\sqrt{-\Delta}}
+\newcommand{\Rcal}{\mathcal{R}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\Copt}{\mathbf{C}}
+\newcommand{\weakto}{\rightharpoonup}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+
+\catcode`@=11
+\def\section{\@startsection{section}{1}%
+  \z@{1.5\linespacing\@plus\linespacing}{.5\linespacing}%
+  {\normalfont\bfseries\large\centering}}
+\catcode`@=12
+
+\title[Supersolution  for a semilinear damped wave equation]
+{Construction of supersolution  for a semilinear damped wave equation}
+
+
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+\section{Setting}
+
+We study mild solutions of the one-dimensional semilinear damped wave
+equation
+\begin{equation}\label{dampedWE}
+u(t)=\ep L(t,u_0,u_1)+\int_0^t S(t-\sigma)|u(\sigma)|^p\,d\sigma ,
+\end{equation}
+where $L(t,u_0,u_1):=(\pt_t+1)S(t)u_0+S(t)u_1$ and
+\begin{equation}\label{eq:def-S}
+(S(t)f)(x)=\frac{e^{-t/2}}{2}\int_{x-t}^{x+t}
+I_0\Big(\tfrac12\sqrt{t^2-(x-y)^2}\Big)f(y)\,dy .
+\end{equation}
+We assume $u_0,u_1\in L^1\cap L^\infty$ with compact support (or
+sufficiently fast decay), and
+\begin{equation}\label{eq:def-moments-refined}
+H_0:=\int_{\R}\bigl(u_0(y)+u_1(y)\bigr)\,dy<0 .
+\end{equation}
+Since the kernel of $S(t)$ is nonnegative, $\ep L(t,u_0,u_1)\le u(t)$ for
+$0\le t<T_{\max}$ and a.e.\ $x$.
+
+Let $G(t,x):=(4\pi t)^{-1/2}e^{-x^2/(4t)}$ be the heat kernel
+of $\pt_t-\pt_x^2$, and write $L(\sigma):=L(\sigma,u_0,u_1)$. We consider
+\begin{equation}\label{dampedWE1}
+w(t):=\int_0^t S(t-\sigma)\,|\ep L(\sigma)|^p\,d\sigma .
+\end{equation}
+
+\section{Asymptotics of $w$ for $p\in(2,3]$}
+\begin{lemma}[Linear asymptotics with rate]\label{lem:linear}
+Let $u_0,u_1\in L^1\cap L^\infty$ and assume in addition
+\begin{equation}\label{eq:first-moment}
+\int_{\R}(1+|x|)\,\bigl|u_0(x)+u_1(x)\bigr|\,dx<\infty .
+\end{equation}
+Then for every $q\in[1,\infty]$ and $t\ge1$,
+\begin{equation}\label{eq:L-asympt}
+\norm{L(t)-H_0\,G(t)}_{L^q}\le C\,t^{-\frac12(1-\frac1q)-\frac12},
+\end{equation}
+where $C$ depends on $\norm{u_0}_{L^1\cap L^\infty}$, $\norm{u_1}_{L^1\cap L^\infty}$
+and the quantity in \eqref{eq:first-moment}. In particular
+$\norm{L(t)}_{L^1}\le C$ and $\norm{L(t)}_{L^\infty}\le C(1+t)^{-1/2}$.
+Without \eqref{eq:first-moment}, \eqref{eq:L-asympt} holds with $o(\cdot)$
+in place of $C\,t^{-1/2}$ on the right-hand side, but no rate.
+\end{lemma}
+
+\begin{proof}[Sketch of proof]
+Write $h:=u_0+u_1$ and $L=\pt_tS(t)u_0+S(t)h$. Split
+$L=\mathcal W(t)+\mathcal D(t)$ into a high-frequency (wave) part and a
+low-frequency (diffusive) part. The explicit kernel \eqref{eq:def-S}, including
+the Dirac masses in $\pt_tS(t)u_0$, gives
+$\norm{\mathcal W(t)}_{L^q}\le Ce^{-ct}(\norm{u_0}_{L^q}+\norm{u_1}_{L^q})$,
+so $\mathcal W$ is negligible. For $\mathcal D$, use
+$\widehat{L}=A_+e^{\lambda_+t}+A_-e^{\lambda_-t}$ with
+$\lambda_+(\xi)=-\xi^2-\xi^4+O(\xi^6)$, $\lambda_-(\xi)=-1+\xi^2+\cdots$ and
+$A_+(\xi)=\widehat h(\xi)+O(\xi^2)\bigl(|\widehat{u_0}|+|\widehat{u_1}|\bigr)$.
+Then $\mathcal D$ equals $e^{t\pt_x^2}h$ up to three types of errors, all
+$O\bigl(t^{-1-\frac12(1-\frac1q)}\bigr)$:
+\begin{enumerate}
+\item the term $\pt_tS(t)u_0$, which behaves like $\pt_te^{t\pt_x^2}u_0$ and satisfies
+$\norm{\pt_te^{t\pt_x^2}u_0}_{L^q}\le Ct^{-1-\frac12(1-\frac1q)}\norm{u_0}_{L^1}$;
+\item the $O(\xi^2)$ correction in $A_+$;
+\item the correction $e^{\lambda_+t}-e^{-t\xi^2}=O(t\xi^4)e^{-t\xi^2/2}$.
+\end{enumerate}
+The remaining main term is controlled in physical space by
+\[
+\bigl(e^{t\pt_x^2}h-H_0G(t)\bigr)(x)
+=\int_{\R}h(y)\bigl(G(t,x-y)-G(t,x)\bigr)\,dy,
+\]
+together with
+$\norm{G(t,\cdot-y)-G(t)}_{L^q}\le |y|\,\norm{\pt_xG(t)}_{L^q}
+\le C|y|\,t^{-\frac12(1-\frac1q)-\frac12}$. Integrating against $|h(y)|$ and
+using \eqref{eq:first-moment} gives \eqref{eq:L-asympt}, including $q=1$ with no logarithm.
+\end{proof}
+
+\begin{lemma}[Comparison with the heat semigroup]\label{lem:heat}
+There is $C>0$ such that for all $s\ge1$ and $g\in L^1\cap L^\infty$,
+\begin{equation}\label{eq:S-heat}
+\norm{S(s)g-e^{s\pt_x^2}g}_{L^\infty}\le C s^{-3/2}\norm{g}_{L^1},
+\end{equation}
+and $\norm{S(s)g}_{L^\infty}\le \min\{\norm{g}_{L^\infty},\,C(1+s)^{-1/2}\norm{g}_{L^1}\}$
+for all $s\ge0$.
+\end{lemma}
+
+\begin{remark}
+Both lemmas follow from the Fourier representation
+$\widehat{S(s)}(\xi)=\dfrac{e^{\lambda_+(\xi)s}-e^{\lambda_-(\xi)s}}{\lambda_+(\xi)-\lambda_-(\xi)}$,
+$\lambda_\pm(\xi)=-\tfrac12\pm\sqrt{\tfrac14-\xi^2}$, using
+$\lambda_+(\xi)=-\xi^2+O(\xi^4)$ as $\xi\to0$ and $\operatorname{Re}\lambda_\pm\le -c<0$
+for $|\xi|\ge\delta$. In the low-frequency region
+$e^{\lambda_+ s}-e^{-s\xi^2}=O(s\xi^4)e^{-s\xi^2/2}$, which gains the
+extra factor $s^{-1}$ in \eqref{eq:S-heat}. The high-frequency part is
+exponentially small for $s\ge1$.
+\end{remark}
+
+\subsection{The heat-flow model}
+
+Set $\kappa:=1-\frac1p\in(0,1)$ and
+\begin{equation}\label{eq:def-W}
+W(\xi):=p^{-1/2}(4\pi)^{\frac{1-p}{2}}
+\int_0^1\tau^{\frac{1-p}{2}}\,G\bigl(1-\kappa\tau,\xi\bigr)\,d\tau ,
+\qquad \xi\in\R .
+\end{equation}
+Since $1-\kappa\tau\ge 1/p$, the Gaussian factor is bounded, and the integral
+converges if and only if $p<3$.
+
+\begin{lemma}[Explicit model]\label{lem:model}
+Let $1<p<3$ and
+\[
+w_{\mathrm{heat}}(t,x):=\ep^p|H_0|^p\int_0^t
+\bigl(e^{(t-\sigma)\pt_x^2}G(\sigma)^p\bigr)(x)\,d\sigma .
+\]
+Then
+\begin{equation}\label{eq:w-heat-profile}
+w_{\mathrm{heat}}(t,x)=\ep^p|H_0|^p\,t^{1-\frac p2}\,W\!\Big(\frac{x}{\sqrt t}\Big).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Since $G(\sigma,x)^p=(4\pi\sigma)^{-p/2}e^{-px^2/(4\sigma)}$, we have
+\[
+G(\sigma,x)^p=p^{-1/2}(4\pi\sigma)^{\frac{1-p}{2}}\,G\Big(\frac{\sigma}{p},x\Big).
+\]
+By the semigroup property,
+$e^{(t-\sigma)\pt_x^2}G(\sigma/p)=G\bigl(t-\sigma+\sigma/p\bigr)=G(t-\kappa\sigma)$.
+Hence
+\[
+w_{\mathrm{heat}}(t,x)=\ep^p|H_0|^p\,p^{-1/2}(4\pi)^{\frac{1-p}{2}}
+\int_0^t\sigma^{\frac{1-p}{2}}G(t-\kappa\sigma,x)\,d\sigma .
+\]
+Substituting $\sigma=t\tau$ and using
+$G(t\theta,x)=t^{-1/2}G(\theta,x/\sqrt t)$ gives
+\eqref{eq:w-heat-profile}, since
+$t\cdot t^{\frac{1-p}{2}}\cdot t^{-1/2}=t^{1-\frac p2}$.
+\end{proof}
+
+Consider the semilinear Cauchy problem
+\begin{equation}
+\begin{aligned}
+    \partial_t U - \Delta U = |U|^p, \\
+    U(0,x) = \varepsilon G(1,x).
+\end{aligned}
+\end{equation}
+
+\subsection{Main result}
+\begin{theorem}\label{thm:w-asympt}
+Let $u_0,u_1\in L^1\cap L^\infty$ satisfy \eqref{eq:first-moment}, and let
+$H_0<0$. There is $C>0$ such that for all $t\ge1$ the following holds.
+\begin{itemize}
+\item If $2<p<3$, then
+\begin{equation}\label{eq:w-asympt-p<3}
+\sup_{x\in\R}\Bigl|\,w(t,x)-\ep^p|H_0|^p\,t^{1-\frac p2}\,
+W\Big(\frac{x}{\sqrt t}\Big)\Bigr|\le C\,\ep^p\,t^{-\frac12},
+\end{equation}
+that is,
+$\displaystyle\sup_{x}\bigl|t^{\frac p2-1}w(t,x)-\ep^p|H_0|^pW(x/\sqrt t)\bigr|
+\le C\ep^p\,t^{-\frac{3-p}{2}}$.
+\item If $p=3$, then
+\begin{equation}\label{eq:w-asympt-p=3}
+\sup_{x\in\R}\Bigl|\,w(t,x)-\frac{\ep^3|H_0|^3}{\sqrt3\,4\pi}\,\log t\;G(t,x)\Bigr|
+\le C\,\ep^3\,t^{-\frac12},
+\end{equation}
+that is,
+$\displaystyle\sup_{x}\Bigl|\frac{\sqrt t}{\log t}\,w(t,x)
+-\frac{\ep^3|H_0|^3}{\sqrt3\,(4\pi)^{3/2}}\,e^{-x^2/(4t)}\Bigr|\le \frac{C\ep^3}{\log t}$.
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+Write $N(\sigma):=|\ep L(\sigma)|^p$ and $N_0(\sigma):=\ep^p|H_0|^pG(\sigma)^p$.
+For $p<3$ set
+\[
+w_1:=\int_0^tS(t-\sigma)N_0(\sigma)\,d\sigma,\qquad
+w_2:=\int_0^tS(t-\sigma)\bigl(N(\sigma)-N_0(\sigma)\bigr)\,d\sigma ,
+\]
+so that $w=w_1+w_2$.
+
+\medskip
+\noindent\emph{Step 1: bounds on $N-N_0$.}
+Let $R:=L-H_0G$. By Lemma~\ref{lem:linear}, $\norm{R(\sigma)}_{L^q}\le
+C\sigma^{-\frac12(1-\frac1q)-\frac12}$ for $\sigma\ge1$.
+From $\bigl||a|^p-|b|^p\bigr|\le p|a-b|(|a|+|b|)^{p-1}$ and H\"older's
+inequality, for $\sigma\ge1$,
+\begin{equation}\label{eq:N-diff}
+\norm{N(\sigma)-N_0(\sigma)}_{L^1}\le C\ep^p\sigma^{-\frac p2},
+\qquad
+\norm{N(\sigma)-N_0(\sigma)}_{L^\infty}\le C\ep^p\sigma^{-\frac{p+1}{2}} .
+\end{equation}
+Indeed,
+$\norm{R\,(|L|+|H_0|G)^{p-1}}_{L^1}\le\norm{R}_{L^p}\norm{|L|+|H_0|G}_{L^p}^{p-1}
+\le C\sigma^{-\frac{p-1}{2p}-\frac12}\,\sigma^{-\frac{(p-1)^2}{2p}}$,
+and the exponents add up to $-\frac p2$. The $L^\infty$ bound is analogous.
+For $\sigma\le1$, $N$ is bounded in $L^1\cap L^\infty$ and
+$\norm{N_0(\sigma)}_{L^1}\sim\ep^p\sigma^{\frac{1-p}{2}}$ is integrable
+because $p<3$.
+
+\medskip
+\noindent\emph{Step 2: $w_2=O(\ep^pt^{-1/2})$ for $2<p<3$.}
+By the second part of Lemma~\ref{lem:heat},
+\begin{align*}
+\norm{w_2(t)}_{L^\infty}
+&\lesssim \int_0^{t/2}(1+t-\sigma)^{-1/2}\norm{N-N_0}_{L^1}\,d\sigma
++\int_{t/2}^{t}\norm{N-N_0}_{L^\infty}\,d\sigma\\
+&\lesssim \ep^p\,t^{-1/2}\Bigl(\int_0^1\bigl(1+\sigma^{\frac{1-p}{2}}\bigr)d\sigma
++\int_1^\infty\sigma^{-\frac p2}\,d\sigma\Bigr)
++\ep^p\,t^{\frac{1-p}{2}} .
+\end{align*}
+Both integrals are finite: the first because $p<3$, the second because
+$p>2$. Since $\frac{1-p}{2}<-\frac12$, we get
+$\norm{w_2(t)}_{L^\infty}\le C\ep^pt^{-1/2}$.
+
+\medskip
+\noindent\emph{Step 3: $w_1$ versus the heat model.}
+By \eqref{eq:S-heat} applied to $g=N_0(\sigma)$,
+\[
+\norm{w_1(t)-w_{\mathrm{heat}}(t)}_{L^\infty}
+\lesssim \ep^p\Bigl(\int_0^{t-1}(t-\sigma)^{-3/2}\sigma^{\frac{1-p}{2}}\,d\sigma
++\int_{t-1}^t\sigma^{-\frac p2}\,d\sigma\Bigr)
+\lesssim \ep^p\bigl(t^{-\frac p2}+t^{\frac{1-p}{2}}\bigr),
+\]
+which is $O(\ep^pt^{-1/2})$ because $p>2$.
+
+\medskip
+\noindent\emph{Step 4: conclusion for $2<p<3$.}
+Steps 2 and 3 together with Lemma~\ref{lem:model} give \eqref{eq:w-asympt-p<3}.
+
+\medskip
+\noindent\emph{Step 5: the case $p=3$.}
+Now $\norm{N_0(\sigma)}_{L^1}\sim\ep^3\sigma^{-1}$ is not integrable at
+$\sigma=0$, so replace $N_0$ by $N_0\mathds 1_{\{\sigma\ge1\}}$ and put
+the interval $[0,1]$ into $w_2$, where it contributes $O(\ep^3t^{-1/2})$.
+Steps 1--3 (with $p=3$) then give
+\[
+w(t,x)=\ep^3|H_0|^3\frac{1}{\sqrt3\,4\pi}\int_1^t\sigma^{-1}
+G\bigl(t-\tfrac23\sigma,x\bigr)\,d\sigma+O(\ep^3t^{-1/2}),
+\]
+because the only difference with $p<3$ is that $\int_1^\infty\sigma^{-3/2}d\sigma<\infty$
+still holds, and the heat-replacement error is $O(\ep^3t^{-1}\log t)$.
+For $1\le\sigma\le t$ we have $t-\tfrac23\sigma\ge t/3$, and
+$|\pt_sG(s,x)|\le Cs^{-3/2}$, so
+\[
+\bigl|G(t-\tfrac23\sigma,x)-G(t,x)\bigr|\le C\,\sigma\,t^{-3/2}.
+\]
+Hence
+\[
+\Bigl|\int_1^t\sigma^{-1}G\bigl(t-\tfrac23\sigma,x\bigr)\,d\sigma-\log t\;G(t,x)\Bigr|
+\le C\,t^{-3/2}\int_1^t d\sigma\le C\,t^{-1/2},
+\]
+uniformly in $x$. This gives \eqref{eq:w-asympt-p=3}.
+\end{proof}
+
+\begin{remark}[Sharpness of the remainder for $2<p<3$]\label{rem:sharp}
+The error $O(\ep^pt^{-1/2})$ in \eqref{eq:w-asympt-p<3} has the right power in
+general. Since $p>2$, the number
+\[
+M_1:=\int_0^\infty\!\!\int_{\R}\Bigl(|L(\sigma,x)|^p-|H_0|^pG(\sigma,x)^p\Bigr)\,dx\,d\sigma
+\]
+is finite, and one expects
+\[
+w(t,x)=\ep^p|H_0|^pt^{1-\frac p2}W\Big(\frac{x}{\sqrt t}\Big)
++\ep^pM_1\,G(t,x)+O\bigl(\ep^pt^{\frac{1-p}{2}}\bigr),
+\]
+so the second term is of exact order $t^{-1/2}$ whenever $M_1\neq0$. This is the same
+order as the linear part $\ep L(t)\approx\ep H_0G(t)$. The condition $p>2$ is precisely
+what makes $M_1$ finite, and for $p\le2$ the remainder is of lower order.
+\end{remark}
+
+\begin{lemma}[Properties of $W$]\label{lem:W}
+Let $2<p<3$, $a:=\frac{3-p}{2}$, $\kappa:=1-\frac1p$ and $c_p:=p^{-1/2}(4\pi)^{-p/2}$. Then $W$ is smooth, even and positive, and
+\begin{align}
+W(\xi)&=\frac{c_p}{a}\,{}_2F_1\!\Big(\tfrac12,a;a+1;\kappa\Big)
+-\frac{\xi^2}{4}\,\frac{c_p}{a}\,{}_2F_1\!\Big(\tfrac32,a;a+1;\kappa\Big)+O(\xi^4)
+&&(\xi\to0),\\
+W(\xi)&\sim c_p\,\Gamma(a)\Big(\frac{4}{\kappa}\Big)^{a}|\xi|^{p-3}\,e^{-\xi^2/4}
+&&(|\xi|\to\infty).
+\end{align}
+\end{lemma}
+
+
+Now we consider \begin{equation}
+    \begin{aligned}
+        (\partial_t^2+\partial_t-\partial_x^2)w
+=
+(t+1)^{-k} (G(t+1,x))^p.
+    \end{aligned}
+\end{equation}
+If $p \in (2,3),$ for which $k>0$ we can find a solution with leading term ?
+
+\begin{proposition}\label{prop:k-range}
+Let $2<p<3$ and let $w$ solve $(\pt_t^2+\pt_t-\pt_x^2)w=(t+1)^{-k}G(t+1,x)^p$ with zero data.
+If $0<k<\frac{3-p}{2}$, then
+\[
+w(t,x)=t^{1-\frac p2-k}\,W_k\Big(\frac{x}{\sqrt t}\Big)+O\bigl(t^{-\frac12}\bigr),
+\]
+uniformly in $x$, where
+\[
+W_k(\xi)=p^{-1/2}(4\pi)^{\frac{1-p}{2}}\int_0^1\tau^{-\frac{p-1}{2}-k}\,G(1-\kappa\tau,\xi)\,d\tau,
+\qquad \kappa=1-\tfrac1p .
+\]
+The function $W_k$ solves
+$W_k''+\frac{\xi}{2}W_k'+\frac{p-2+2k}{2}W_k=-G(1,\xi)^p$. For $k=\frac{3-p}{2}$ a factor $\log t$ appears,
+and for $k>\frac{3-p}{2}$ one has $w\sim M\,G(t,x)$ with $M=\int_0^\infty\!\int_{\R}f\,dx\,dt$.
+\end{proposition}
+
+
+\section{A model problem with a time-weighted Gaussian source}
+
+Throughout, $2<p<3$, $k>0$, $\kappa:=1-\frac1p\in(0,1)$,
+\begin{equation}\label{eq:def-beta-cstar}
+\beta:=\frac{p-1}{2}+k,\qquad c_*:=p^{-1/2}(4\pi)^{\frac{1-p}{2}},
+\end{equation}
+and $G(s,x)=(4\pi s)^{-1/2}e^{-x^2/(4s)}$. Note that $\beta>\frac12$ because $p>2$, and
+\begin{equation}\label{eq:beta-vs-k}
+\beta<1\iff k<\tfrac{3-p}{2},\qquad \beta=1\iff k=\tfrac{3-p}{2},\qquad \beta>1\iff k>\tfrac{3-p}{2}.
+\end{equation}
+Let
+\[
+f(\sigma,x):=(\sigma+1)^{-k}\,G(\sigma+1,x)^p ,
+\]
+and let $w$ be the solution of $(\pt_t^2+\pt_t-\pt_x^2)w=f$, $w(0)=\pt_tw(0)=0$, i.e.
+\begin{equation}\label{eq:w-duhamel}
+w(t)=\int_0^tS(t-\sigma)f(\sigma)\,d\sigma .
+\end{equation}
+
+\subsection{Two lemmas}
+
+\begin{lemma}[Comparison with the heat flow]\label{lem:heat}
+There are $C,c>0$ such that for all $s\ge1$ and $g\in L^1\cap L^2(\R)$,
+\begin{equation}\label{eq:S-heat}
+\norm{S(s)g-e^{s\pt_x^2}g}_{L^\infty}\le C\,s^{-3/2}\norm{g}_{L^1}+C\,e^{-cs}\norm{g}_{L^2}.
+\end{equation}
+Moreover, for all $s\ge0$ and $g\in L^\infty$,
+\begin{equation}\label{eq:S-contraction}
+\norm{S(s)g}_{L^\infty}\le\norm{g}_{L^\infty},\qquad
+\norm{e^{s\pt_x^2}g}_{L^\infty}\le\norm{g}_{L^\infty}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+\emph{Contraction.} The kernel of $S(s)$ is nonnegative, and $S(s)1=1-e^{-s}$ (it is the solution of the
+linear damped wave equation with data $(0,1)$). Hence $\norm{S(s)g}_{L^\infty}\le(1-e^{-s})\norm{g}_{L^\infty}$.
+The heat flow is a contraction on $L^\infty$.
+
+\emph{Comparison.} Put $\rho(\xi):=\sqrt{1-4\xi^2}$ and $\lambda_\pm:=\frac{-1\pm\rho}{2}$. Then
+\[
+\widehat{S(s)}(\xi)=\frac{e^{\lambda_+s}-e^{\lambda_-s}}{\rho},\qquad
+m(s,\xi):=\widehat{S(s)}(\xi)-e^{-s\xi^2},
+\]
+and $(S(s)g-e^{s\pt_x^2}g)(x)=\frac1{2\pi}\int e^{ix\xi}m(s,\xi)\hat g(\xi)\,d\xi$.
+
+\emph{Low frequencies, $|\xi|\le\frac14$.} Here $\rho\in[\frac{\sqrt3}{2},1]$ and
+$\lambda_+=-\frac{2\xi^2}{1+\rho}\le-\xi^2$, $|\lambda_++\xi^2|\le C\xi^4$, $|\rho^{-1}-1|\le C\xi^2$,
+$\lambda_-\le-\frac12$. Write
+\[
+m=e^{\lambda_+s}\Big(\frac1\rho-1\Big)+\bigl(e^{\lambda_+s}-e^{-s\xi^2}\bigr)-\frac{e^{\lambda_-s}}{\rho}.
+\]
+Using $|e^a-e^b|\le|a-b|e^{\max\{a,b\}}$ we get
+$|m|\le C(\xi^2+s\xi^4)e^{-s\xi^2}+Ce^{-s/2}$, hence
+\[
+\int_{|\xi|\le1/4}|m|\,d\xi\le C\bigl(s^{-3/2}+s\cdot s^{-5/2}\bigr)+Ce^{-s/2}\le Cs^{-3/2}.
+\]
+Since $|\hat g|\le\norm{g}_{L^1}$, this part contributes $Cs^{-3/2}\norm{g}_{L^1}$.
+
+\emph{High frequencies, $|\xi|>\frac14$.} For $\frac14<|\xi|<\frac12$ we have $\lambda_\pm\le\lambda_+\le-\frac1{16}$ and,
+by the mean value theorem, $|\widehat{S(s)}|\le s\,e^{\lambda_+s}\le se^{-s/16}$. For $|\xi|\ge\frac12$ put
+$\theta=\sqrt{\xi^2-\frac14}$; then $\widehat{S(s)}=e^{-s/2}\frac{\sin(s\theta)}{\theta}$, so
+$|\widehat{S(s)}|\le e^{-s/2}\min\{s,\theta^{-1}\}$ and
+$\int_{|\xi|\ge1/2}\min\{s^2,\theta^{-2}\}\,d\xi\le Cs^2$. Finally
+$e^{-s\xi^2}\le e^{-s/32}e^{-s\xi^2/2}$ for $|\xi|>\frac14$. Altogether
+$\norm{m(s,\cdot)}_{L^2(|\xi|>1/4)}\le Ce^{-cs}$, and by Cauchy--Schwarz and Plancherel
+this part contributes at most $Ce^{-cs}\norm{g}_{L^2}$.
+\end{proof}
+
+\begin{lemma}[Explicit form of the heat model]\label{lem:model-k}
+Let $w_{\mathrm{heat}}(t):=\int_0^te^{(t-\sigma)\pt_x^2}f(\sigma)\,d\sigma$. Then
+\begin{equation}\label{eq:f-gauss}
+f(\sigma,x)=c_*\,(\sigma+1)^{-\beta}\,G\Bigl(\frac{\sigma+1}{p},x\Bigr),
+\end{equation}
+\begin{equation}\label{eq:w-heat-explicit}
+w_{\mathrm{heat}}(t,x)=c_*\int_0^t(\sigma+1)^{-\beta}\,G\bigl(t+\tfrac1p-\kappa\sigma,\,x\bigr)\,d\sigma .
+\end{equation}
+Moreover
+\begin{equation}\label{eq:f-norms}
+\norm{f(\sigma)}_{L^1}=c_*(\sigma+1)^{-\beta},\qquad
+\norm{f(\sigma)}_{L^\infty}=(4\pi)^{-p/2}(\sigma+1)^{-\beta-\frac12},\qquad
+\norm{f(\sigma)}_{L^2}\le C(\sigma+1)^{-\beta-\frac14}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For $s>0$, $G(s,x)^p=(4\pi s)^{-p/2}e^{-px^2/(4s)}=c_*\,s^{\frac{1-p}{2}}\,G(s/p,x)$, since
+$G(s/p,x)=(4\pi s/p)^{-1/2}e^{-px^2/(4s)}$. With $s=\sigma+1$ and
+$-k-\frac{p-1}{2}=-\beta$ this is \eqref{eq:f-gauss}. By the semigroup property
+$e^{(t-\sigma)\pt_x^2}G(\frac{\sigma+1}p)=G\bigl(t-\sigma+\frac{\sigma+1}{p}\bigr)=G(t+\frac1p-\kappa\sigma)$,
+which gives \eqref{eq:w-heat-explicit}. The norms follow from $\int G(s/p)=1$, $\norm{G(s)}_{L^\infty}=(4\pi s)^{-1/2}$,
+and $k+\frac p2=\beta+\frac12$; the $L^2$ norm is $C(\sigma+1)^{-k}(\sigma+1)^{-p/2+1/4}$.
+\end{proof}
+
+\subsection{The proposition}
+
+For $\beta<1$ define
+\begin{equation}\label{eq:def-Wk}
+W_k(\xi):=c_*\int_0^1\tau^{-\beta}\,G(1-\kappa\tau,\xi)\,d\tau,\qquad \xi\in\R .
+\end{equation}
+
+\begin{proposition}\label{prop:k-range}
+Let $2<p<3$, $k>0$, and let $w$ be given by \eqref{eq:w-duhamel}. There is $C=C(p,k)$ such that for all
+$t\ge2$ and $x\in\R$:
+\begin{enumerate}
+\item[(i)] If $0<k<\frac{3-p}{2}$, then $W_k\in C^\infty(\R)$ is even, positive, solves
+\begin{equation}\label{eq:Wk-ode}
+W_k''+\frac\xi2W_k'+\frac{p-2+2k}{2}\,W_k=-G(1,\xi)^p ,
+\end{equation}
+and
+\begin{equation}\label{eq:prop-i}
+\Bigl|w(t,x)-t^{1-\frac p2-k}\,W_k\Bigl(\frac{x}{\sqrt t}\Bigr)\Bigr|\le C\,t^{-1/2}.
+\end{equation}
+\item[(ii)] If $k=\frac{3-p}{2}$, then
+\begin{equation}\label{eq:prop-ii}
+\bigl|w(t,x)-c_*\,\log t\;G(t,x)\bigr|\le C\,t^{-1/2}.
+\end{equation}
+\item[(iii)] If $k>\frac{3-p}{2}$, let $M:=\int_0^\infty\!\!\int_{\R}f\,dx\,d\sigma=\dfrac{c_*}{\beta-1}<\infty$. Then
+\begin{equation}\label{eq:prop-iii}
+\bigl|w(t,x)-M\,G(t,x)\bigr|\le C\bigl(t^{\frac12-\beta}+t^{-\frac32}\log(2+t)\bigr).
+\end{equation}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Write $w=w_{\mathrm{heat}}+D$ with
+\[
+D(t):=\int_0^t\bigl(S(t-\sigma)-e^{(t-\sigma)\pt_x^2}\bigr)f(\sigma)\,d\sigma .
+\]
+Set
+\begin{equation}\label{eq:def-J}
+J(t):=\int_0^t(\sigma+1)^{-\beta}\,d\sigma\le C\begin{cases}t^{1-\beta},&\beta<1,\\ \log(2+t),&\beta=1,\\ 1,&\beta>1.\end{cases}
+\end{equation}
+
+\medskip
+\noindent\textbf{Step 1: the wave--heat error $D$.}
+We claim that for $t\ge2$,
+\begin{equation}\label{eq:D-bound}
+\norm{D(t)}_{L^\infty}\le C\bigl(t^{-3/2}J(t)+t^{-\beta}\bigr).
+\end{equation}
+Split $[0,t]=[0,t-1]\cup[t-1,t]$.
+
+\emph{The interval $[t-1,t]$.} By \eqref{eq:S-contraction} and \eqref{eq:f-norms}, since $\sigma+1\ge t/2$ there,
+\[
+\int_{t-1}^t\norm{\bigl(S(t-\sigma)-e^{(t-\sigma)\pt_x^2}\bigr)f(\sigma)}_{L^\infty}d\sigma
+\le2\int_{t-1}^t\norm{f(\sigma)}_{L^\infty}d\sigma\le Ct^{-\beta-\frac12}.
+\]
+
+\emph{The interval $[0,t-1]$.} Here $t-\sigma\ge1$, and Lemma~\ref{lem:heat} with \eqref{eq:f-norms} gives
+\[
+\norm{\cdots}_{L^\infty}\le C(t-\sigma)^{-3/2}(\sigma+1)^{-\beta}+Ce^{-c(t-\sigma)}(\sigma+1)^{-\beta-\frac14}.
+\]
+For $\sigma\le t/2$ the first term is at most $C t^{-3/2}(\sigma+1)^{-\beta}$, whose integral is $\le Ct^{-3/2}J(t)$.
+For $\sigma\in[t/2,t-1]$ we use $(\sigma+1)^{-\beta}\le Ct^{-\beta}$ and $\int_1^\infty s^{-3/2}ds<\infty$ to get $Ct^{-\beta}$.
+The exponential term contributes $\le Cte^{-ct/2}+Ct^{-\beta-\frac14}\int_0^\infty e^{-cs}ds\le Ct^{-\beta}$.
+Adding the three pieces gives \eqref{eq:D-bound}.
+
+\medskip
+\noindent\textbf{Step 2: a derivative bound for $G$.}
+Since $\pt_sG=G\bigl(-\frac1{2s}+\frac{x^2}{4s^2}\bigr)$, we have
+\begin{equation}\label{eq:dsG}
+\sup_{x\in\R}|\pt_sG(s,x)|\le C_0\,s^{-3/2},\qquad s>0 .
+\end{equation}
+For $\sigma\in[0,t]$, $t-\kappa\sigma\ge t/p$. Hence for any $\mu\in[0,1/p]$ and $\sigma\in[0,t]$, the mean value theorem gives
+\begin{equation}\label{eq:MVT}
+\bigl|G(t+\mu-\kappa\sigma,x)-G(t-\kappa\sigma,x)\bigr|\le C\mu\,t^{-3/2}.
+\end{equation}
+Likewise, for $\sigma\in[0,t]$, both $t+\frac1p-\kappa\sigma$ and $t$ are $\ge t/p$, so
+\begin{equation}\label{eq:MVT2}
+\bigl|G(t+\tfrac1p-\kappa\sigma,x)-G(t,x)\bigr|\le C\,(\sigma+1)\,t^{-3/2},
+\end{equation}
+because $|\frac1p-\kappa\sigma|\le\sigma+1$.
+
+\medskip
+\noindent\textbf{Step 3: case (i), $\beta<1$.}
+
+\emph{(a) Regularity and equation for $W_k$.}
+Since $1-\kappa\tau\ge1/p$, all $\xi$-derivatives of $G(1-\kappa\tau,\xi)$ are bounded uniformly in $\tau\in[0,1]$, and
+$\tau^{-\beta}\in L^1(0,1)$. So $W_k\in C^\infty$, even and positive. Define
+\[
+w_*(t,x):=c_*\int_0^t\sigma^{-\beta}G(t-\kappa\sigma,x)\,d\sigma=t^{\frac12-\beta}W_k\Bigl(\frac x{\sqrt t}\Bigr),
+\]
+the second equality by $\sigma=t\tau$ and $G(t\theta,x)=t^{-1/2}G(\theta,x/\sqrt t)$; note $\frac12-\beta=1-\frac p2-k$.
+Let $\Phi(t,x;\sigma):=c_*\sigma^{-\beta}G(t-\kappa\sigma,x)$, which solves $\pt_t\Phi=\pt_x^2\Phi$ for $0<\sigma<t$.
+Differentiating under the integral (legitimate since $\sigma^{-\beta}$ is integrable and the $t$- and $x$-derivatives of $G(t-\kappa\sigma,x)$ are bounded locally uniformly in $t>0$),
+\[
+\pt_tw_*-\pt_x^2w_*=\Phi(t,x;t)=c_*t^{-\beta}G(t/p,x)=t^{-k}G(t,x)^p,
+\]
+where the last equality is \eqref{eq:f-gauss}-type identity $G(s,x)^p=c_*s^{\frac{1-p}2}G(s/p,x)$ at $s=t$.
+Insert $w_*=t^{\alpha}W_k(\xi)$, $\alpha=1-\frac p2-k$, $\xi=x/\sqrt t$:
+\[
+\pt_tw_*-\pt_x^2w_*=t^{\alpha-1}\Bigl[\alpha W_k-\tfrac\xi2W_k'-W_k''\Bigr],\qquad t^{-k}G(t,x)^p=t^{\alpha-1}G(1,\xi)^p,
+\]
+which gives \eqref{eq:Wk-ode}, since $-\alpha=\frac{p-2+2k}{2}$.
+
+\emph{(b) $w_{\mathrm{heat}}$ versus $w_*$.} By \eqref{eq:w-heat-explicit},
+\[
+w_{\mathrm{heat}}-w_*=c_*\int_0^t\bigl[(\sigma+1)^{-\beta}-\sigma^{-\beta}\bigr]G(t+\tfrac1p-\kappa\sigma,x)\,d\sigma
++c_*\int_0^t\sigma^{-\beta}\bigl[G(t+\tfrac1p-\kappa\sigma,x)-G(t-\kappa\sigma,x)\bigr]d\sigma=:A+B.
+\]
+For $A$, since $G(t+\frac1p-\kappa\sigma,x)\le(4\pi t/p)^{-1/2}$ and
+\[
+\int_0^t\bigl[\sigma^{-\beta}-(\sigma+1)^{-\beta}\bigr]d\sigma
+=\frac{1+t^{1-\beta}-(t+1)^{1-\beta}}{1-\beta}\le\frac1{1-\beta},
+\]
+we get $|A|\le Ct^{-1/2}$. For $B$, by \eqref{eq:MVT} with $\mu=\frac1p$,
+$|B|\le Ct^{-3/2}\int_0^t\sigma^{-\beta}d\sigma=Ct^{-\frac12-\beta}\le Ct^{-1/2}$.
+
+\emph{(c) Conclusion.} By Step 1, $\norm{D}_\infty\le C(t^{-\frac12-\beta}+t^{-\beta})\le Ct^{-1/2}$, using $\beta>\frac12$
+(this is exactly where $p>2$ enters). Together with (b), this gives \eqref{eq:prop-i}.
+
+\medskip
+\noindent\textbf{Step 4: case (ii), $\beta=1$.}
+By \eqref{eq:w-heat-explicit}, \eqref{eq:MVT2}, and $J(t)=\log(t+1)$,
+\[
+\Bigl|w_{\mathrm{heat}}-c_*\log(t+1)\,G(t,x)\Bigr|
+\le Cc_*\,t^{-3/2}\int_0^t(\sigma+1)^{-1}(\sigma+1)\,d\sigma\le Ct^{-1/2}.
+\]
+Moreover $c_*|\log(t+1)-\log t|\,G(t,x)\le Ct^{-1}t^{-1/2}$. By \eqref{eq:D-bound},
+$\norm{D}_\infty\le C(t^{-3/2}\log(2+t)+t^{-1})\le Ct^{-1/2}$. This gives \eqref{eq:prop-ii}.
+
+\medskip
+\noindent\textbf{Step 5: case (iii), $\beta>1$.}
+Here $M=c_*\int_0^\infty(\sigma+1)^{-\beta}d\sigma=\frac{c_*}{\beta-1}$ by \eqref{eq:f-gauss}. Write
+\[
+w_{\mathrm{heat}}-MG(t,x)=c_*\int_0^t(\sigma+1)^{-\beta}\bigl[G(t+\tfrac1p-\kappa\sigma,x)-G(t,x)\bigr]d\sigma
+-c_*G(t,x)\int_t^\infty(\sigma+1)^{-\beta}d\sigma .
+\]
+By \eqref{eq:MVT2} the first term is bounded by
+$Ct^{-3/2}\int_0^t(\sigma+1)^{1-\beta}d\sigma\le C\bigl(t^{\frac12-\beta}+t^{-\frac32}\log(2+t)\bigr)$
+(the integral is $\le C(t^{2-\beta}+\log(2+t)+1)$ for $\beta\neq2$, with $\log$ at $\beta=2$).
+The second is bounded by $Ct^{-1/2}t^{1-\beta}=Ct^{\frac12-\beta}$. By \eqref{eq:D-bound},
+$\norm{D}_\infty\le C(t^{-3/2}+t^{-\beta})$, which is absorbed. This gives \eqref{eq:prop-iii}.
+\end{proof}
+
+\begin{remark}\label{rem:where-p>2}
+The assumption $p>2$ is used only through $\beta>\frac12$, in Step 1: the term $t^{-\beta}$ coming from the interval
+$\sigma\in[t/2,t]$ must be $O(t^{-1/2})$. In case (i) the remainder $t^{-1/2}$ is of strictly lower order than the leading term
+$t^{\frac12-\beta}$ precisely because $\beta<1$, with relative size $t^{\beta-1}$. Note also that $W_k(0)\to\infty$
+as $\beta\uparrow1$ (that is, $k\uparrow\frac{3-p}2$), which matches the logarithm in case (ii).
+\end{remark}
+
+Points to check:
+
+The $O(t^{-1/2})$ in (i) is the weak point near the endpoints. The constant $C(p,k)$ blows up as $\beta\uparrow1$ (through $\frac1{1-\beta}$ in $A$) and the relative error $t^{\beta-1}$ degrades. This is natural, not an artifact.
+**$\|f(\sigma)\|_{L^2}$ in Lemma~\ref{lem:heat}.** This is why the lemma takes $g\in L^1\cap L^2$. For your original problem with $N_0=\ep^p|H_0|^pG^p$ and $N-N_0$, apply the lemma with $\|g\|_{L^2}\le\|g\|_{L^1}^{1/2}\|g\|_{L^\infty}^{1/2}$.
+Differentiating under the integral in Step 3(a). I justified it in one sentence. If you want a fully formal treatment, truncate to $\sigma\in[\delta,t]$ and let $\delta\to0$.
+
+If you want, I can rewrite the earlier theorem’s Steps 2–3 to use the new Lemma~\ref{lem:heat} so the two sections are consistent.
+
+\section{Heuristic construction of the supersolution}
+
+
+\subsection{Supersolution ansatz}
+
+
+We seek a supersolution of the form
+\begin{equation}\label{eq:def-supersolution}
+U(t,x)
+:=
+\varepsilon L(t,u_0,u_1)(x)
++
+a_\varepsilon(t)S(t+1)G(1,x),
+\end{equation}
+where
+\[
+a_\varepsilon\in C^2([0,\infty)),
+\qquad
+a_\varepsilon(t)\ge0,
+\qquad
+a_\varepsilon(0)=0.
+\]
+
+
+The condition \(a_\varepsilon(0)=0\) together with
+\(\mathcal R_\varepsilon(0,x)=0\) ensures that
+\[
+U(0,x)
+=
+\varepsilon u_0(x).
+\]
+
+Moreover,
+\[
+\partial_tU(0,x)
+=
+\varepsilon u_1(x)
++
+\dot a_\varepsilon(0)G(1,x),
+\]
+so that
+\[
+\partial_tU(0,x)
+\ge
+\varepsilon u_1(x)
+\]
+whenever
+\[
+\dot a_\varepsilon(0)\ge0.
+\]
+
+The linear term \(L(t,u_0,u_1)\) satisfies
+\[
+(\partial_t^2+\partial_t-\partial_x^2)L=0.
+\]
+
+On the other hand, the shifted heat kernel
+\[
+G(t+1,x)
+=
+\frac1{\sqrt{4\pi(t+1)}}
+\exp\!\left(
+-\frac{x^2}{4(t+1)}
+\right)
+\]
+is not an exact solution of the damped wave equation. Since
+\[
+\partial_tG=\partial_x^2G,
+\]
+we have
+\begin{equation}\label{eq:heat-kernel-residual}
+(\partial_t^2+\partial_t-\partial_x^2)G(t+1,x)
+=
+\partial_t^2G(t+1,x).
+\end{equation}
+
+A direct computation yields
+\begin{equation}\label{eq:heat-kernel-second-time-derivative}
+\partial_t^2G(t+1,x)
+=
+G(t+1,x)
+\left(
+\frac{3}{4(t+1)^2}
+-\frac{3x^2}{4(t+1)^3}
++\frac{x^4}{16(t+1)^4}
+\right).
+\end{equation}
+Hence,
+\begin{equation}\label{eq:heat-kernel-residual-bound}
+\bigl|\partial_t^2G(t+1,x)\bigr|
+\le
+C(t+1)^{-2}
+\left(
+1+\frac{x^4}{(t+1)^2}
+\right)
+G(t+1,x).
+\end{equation}
+
+In particular, for every fixed \(\delta<1/2\),
+\[
+|x|\le (t+1)^{1/2+\delta}
+\]
+implies
+\[
+\bigl|\partial_t^2G(t+1,x)\bigr|
+\le
+C(t+1)^{-2+4\delta}
+G(t+1,x).
+\]
+
+Thus \(G(t+1,x)\) is an approximate solution of the damped wave equation
+with a residual that is small compared with the Gaussian profile in the
+extended parabolic region.
+
+\begin{equation}
+    \begin{aligned}
+        (\partial_t^2+\partial_t-\partial_x^2)w
+=
+(t+1)^{-k} P_k( x^2/(t+1)) G(t+1,x).
+    \end{aligned}
+\end{equation}
+Here $P_k(y)$ is a polynomial in $y$ of order at most $k$ and $k \geq 2$
+Let us consider the inhomogeneous damped wave equation
+\begin{equation}
+    \begin{aligned}
+        (\partial_t^2+\partial_t-\partial_x^2)w
+= F(t,x), \\
+|F(t,x)| \lesssim 
+(t+1)^{-A} \rangle x^2/(t+1)\rangle^B G(t+1,x)  \mathds{1}_{\{|x|\gtrsim (1+t)^{1/2+\delta}\}}.
+    \end{aligned}
+\end{equation}
+with zero initial data, what kind of estimate satisfies $w$
+Consider
+\begin{equation}
+    \begin{aligned}
+   &     (\partial_t^2+\partial_t-\partial_x^2)w
+=
+(t+1)^{-k}  G_c(t+1,x), \\
+& G_c(t,x) = \frac{1}{\sqrt{4\pi t}} e^{-c x^2/(4t)}
+    \end{aligned}
+\end{equation}
+with zero initial data. What is the leading term in $w$
+\appendix
+
+
+
+\section{Invariant subspace}
+
+
+
+\begin{lemma}[Gaussian--polynomial invariance]
+\label{lem:gaussian-polynomial-invariance}
+For $k\in\mathbb N$, define
+\[
+\mathcal H_k
+:=
+\left\{
+(t+1)^{-k}
+P\!\left(\frac{x^2}{t+1}\right)
+G(t+1,x)
+:
+P\in\mathbb R_k[Y]
+\right\},
+\]
+where $\mathbb R_k[Y]$ denotes the space of polynomials of degree at
+most $k$.
+
+Then $\mathcal H_k$ is invariant under the operators
+\[
+\partial_t,
+\qquad
+\partial_x^2,
+\qquad
+\partial_t^2,
+\qquad
+\partial_t^2+\partial_t-\partial_x^2 .
+\]
+
+More precisely, for every
+\[
+F(t,x)
+=
+(t+1)^{-k}
+P\!\left(\frac{x^2}{t+1}\right)
+G(t+1,x)
+\in\mathcal H_k,
+\]
+there exist polynomials
+\[
+P_t,\ P_{xx},\ P_{tt},\ P_L
+\in\mathbb R_k[Y]
+\]
+such that
+\begin{align*}
+\partial_tF
+&=
+(t+1)^{-(k+1)}
+P_t\!\left(\frac{x^2}{t+1}\right)
+G(t+1,x),
+\\
+\partial_x^2F
+&=
+(t+1)^{-(k+1)}
+P_{xx}\!\left(\frac{x^2}{t+1}\right)
+G(t+1,x),
+\\
+\partial_t^2F
+&=
+(t+1)^{-(k+2)}
+P_{tt}\!\left(\frac{x^2}{t+1}\right)
+G(t+1,x),
+\\
+(\partial_t^2+\partial_t-\partial_x^2)F
+&=
+(t+1)^{-(k+2)}
+P_L\!\left(\frac{x^2}{t+1}\right)
+G(t+1,x).
+\end{align*}
+In particular, the Gaussian profile is preserved, and only the
+polynomial factor changes.
+\end{lemma}
+
+\begin{proof}
+Set
+\[
+y:=\frac{x^2}{t+1},
+\]
+and write
+\[
+F(t,x)=(t+1)^{-k}P(y)G(t+1,x).
+\]
+
+Since
+\[
+\partial_tG
+=
+\left(
+-\frac1{2(t+1)}
++\frac{y}{4(t+1)}
+\right)
+G
+\]
+and
+\[
+\partial_ty
+=
+-\frac{y}{t+1},
+\]
+we obtain
+\begin{align*}
+\partial_tF
+&=
+-k(t+1)^{-k-1}P(y)G
+\\
+&\quad
+-(t+1)^{-k-1}yP'(y)G
+\\
+&\quad
++(t+1)^{-k-1}
+\left(
+-\frac12+\frac y4
+\right)
+P(y)G.
+\end{align*}
+Hence
+\[
+\partial_tF
+=
+(t+1)^{-k-1}
+P_t(y)G,
+\]
+where
+\[
+P_t(y)
+=
+-kP(y)-yP'(y)
++
+\left(-\frac12+\frac y4\right)P(y).
+\]
+Since differentiation does not increase the degree,
+\[
+\deg P_t\le k.
+\]
+
+Similarly,
+\[
+\partial_xG
+=
+-\frac{x}{2(t+1)}G,
+\qquad
+\partial_xy
+=
+\frac{2x}{t+1}.
+\]
+Therefore
+\[
+\partial_xF
+=
+x(t+1)^{-k-1}
+\left(
+2P'(y)-\frac12P(y)
+\right)G.
+\]
+
+Differentiating once more gives
+\[
+\partial_x^2F
+=
+(t+1)^{-k-1}
+P_{xx}(y)G,
+\]
+where
+\[
+P_{xx}(y)
+=
+4yP''(y)
++
+(2-2y)P'(y)
++
+\left(
+\frac y4-\frac12
+\right)P(y).
+\]
+Again,
+\[
+\deg P_{xx}\le k.
+\]
+
+Applying $\partial_t$ once more,
+\[
+\partial_t^2F
+=
+(t+1)^{-k-2}
+P_{tt}(y)G,
+\]
+for some polynomial $P_{tt}$ satisfying
+\[
+\deg P_{tt}\le k.
+\]
+
+Finally,
+\[
+(\partial_t^2+\partial_t-\partial_x^2)F
+=
+(t+1)^{-k-2}
+P_{tt}(y)G
++
+(t+1)^{-k-1}
+\bigl(P_t(y)-P_{xx}(y)\bigr)G.
+\]
+
+Since
+\[
+P_t(y)-P_{xx}(y)
+\]
+is itself a polynomial of degree at most $k$, we may absorb the last
+term into another polynomial and obtain
+\[
+(\partial_t^2+\partial_t-\partial_x^2)F
+=
+(t+1)^{-k-2}
+P_L(y)G
+\]
+with
+\[
+\deg P_L\le k.
+\]
+
+This proves the claim.
+\end{proof}
+
+\begin{remark}
+The lemma shows that the finite-dimensional space
+\[
+\mathcal H_k
+\]
+is stable under the damped wave operator. Consequently, if
+\[
+(\partial_t^2+\partial_t-\partial_x^2)w
+=
+(t+1)^{-k}
+P_k\!\left(\frac{x^2}{t+1}\right)
+G(t+1,x),
+\]
+it is natural to seek a particular solution in the form
+\[
+w(t,x)
+=
+(t+1)^{-(k-1)}
+\widetilde P_k
+\!\left(\frac{x^2}{t+1}\right)
+G(t+1,x),
+\]
+where $\widetilde P_k$ is another polynomial of degree at most $k$.
+The determination of $\widetilde P_k$ reduces to solving a finite
+dimensional linear algebra problem on the polynomial space
+$\mathbb R_k[Y]$.
+\end{remark}
+
+.
+
+\subsection{Linear algebra for Gaussian--polynomial profiles}
+\label{subsec:linear-algebra-gaussian-polynomial}
+
+We introduce a finite-dimensional formalism for Gaussian--polynomial
+profiles. Set
+\[
+T:=t+1,
+\qquad
+Y:=\frac{x^2}{T},
+\]
+and recall that
+\[
+G(T,x)
+=
+\frac{1}{\sqrt{4\pi T}}
+\exp\left(-\frac{x^2}{4T}\right).
+\]
+
+For $k\in\N\cup\{0\}$, let
+\[
+\mathbb P_k
+:=
+\set{
+P\in\R\deg P\le k
+}.
+\]
+For $m\in\R$, define the Gaussian--polynomial space
+\begin{equation}\label{eq:def-gaussian-polynomial-space}
+\mathcal H_{m,k}
+:=
+\set{
+T^{-m}P(Y)G(T,x):
+P\in\mathbb P_k
+}.
+\end{equation}
+
+The exponent $m$ and the polynomial degree $k$ play different roles:
+$m$ measures the temporal decay, while $k$ measures the order of the
+polynomial correction in the self-similar variable $Y$.
+
+\medskip
+
+We first compute the action of the parabolic operator
+\[
+\partial_t-\partial_x^2
+\]
+on $\mathcal H_{m,k}$.
+
+\begin{lemma}[The reduced polynomial operator]
+\label{lem:reduced-polynomial-operator}
+For $m\in\R$, define
+\begin{equation}\label{eq:def-Am}
+\mathcal A_mP
+:=
+4Y P''+(2-Y)P'+mP.
+\end{equation}
+Then, for every polynomial $P$,
+\begin{equation}\label{eq:heat-operator-gaussian-polynomial}
+(\partial_t-\partial_x^2)
+\left[
+T^{-m}P(Y)G(T,x)
+\right]
+=
+-T^{-m-1}
+(\mathcal A_mP)(Y)G(T,x).
+\end{equation}
+Moreover,
+\[
+\mathcal A_m(\mathbb P_k)
+\subset\mathbb P_k.
+\]
+Consequently,
+\[
+(\partial_t-\partial_x^2)\mathcal H_{m,k}
+\subset
+\mathcal H_{m+1,k}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+F(t,x):=T^{-m}P(Y)G(T,x).
+\]
+Since
+\[
+\partial_tY=-\frac{Y}{T},
+\qquad
+\partial_xY=\frac{2x}{T},
+\]
+and
+\[
+\partial_tG
+=
+\left(
+-\frac{1}{2T}+\frac{Y}{4T}
+\right)G,
+\qquad
+\partial_xG=-\frac{x}{2T}G,
+\]
+we obtain
+\begin{align}
+\partial_tF
+&=
+T^{-m-1}
+\left[
+-mP-YP'
++
+\left(
+-\frac12+\frac Y4
+\right)P
+\right]G.
+\label{eq:dt-gaussian-polynomial}
+\end{align}
+
+On the other hand,
+\[
+\partial_x\left(T^{-m}P(Y)\right)
+=
+2xT^{-m-1}P'(Y)
+\]
+and
+\[
+\partial_x^2\left(T^{-m}P(Y)\right)
+=
+T^{-m-1}
+\left(
+2P'+4YP''
+\right).
+\]
+Using
+\[
+\partial_x^2(fG)
+=
+f_{xx}G+2f_xG_x+fG_{xx}
+\]
+and
+\[
+G_{xx}=G_t,
+\]
+we find
+\begin{align*}
+(\partial_t-\partial_x^2)(fG)
+&=
+\left(
+f_t-f_{xx}+\frac{x}{T}f_x
+\right)G,
+\end{align*}
+where
+\[
+f(t,x)=T^{-m}P(Y).
+\]
+Therefore,
+\begin{align*}
+(\partial_t-\partial_x^2)F
+&=
+T^{-m-1}
+\left[
+-mP-YP'
+-2P'-4YP''
++2YP'
+\right]G
+\\
+&=
+-T^{-m-1}
+\left[
+4YP''+(2-Y)P'+mP
+\right]G.
+\end{align*}
+This proves \eqref{eq:heat-operator-gaussian-polynomial}.
+
+Since differentiation decreases the polynomial degree and multiplication
+by $Y$ increases it by at most one,
+\[
+\deg(\mathcal A_mP)\le\deg P.
+\]
+Thus,
+\[
+\mathcal A_m(\mathbb P_k)\subset\mathbb P_k,
+\]
+which proves the final assertion.
+\end{proof}
+
+\begin{lemma}[Action on monomials]
+\label{lem:Am-action-monomials}
+For every $j\in\N\cup\{0\}$,
+\begin{equation}\label{eq:Am-action-monomials}
+\mathcal A_m(Y^j)
+=
+(m-j)Y^j
++
+2j(2j-1)Y^{j-1},
+\end{equation}
+where the second term is understood to vanish when $j=0$.
+\end{lemma}
+
+\begin{proof}
+For $j\ge1$,
+\[
+\frac{d}{dY}Y^j=jY^{j-1},
+\qquad
+\frac{d^2}{dY^2}Y^j=j(j-1)Y^{j-2}.
+\]
+Therefore,
+\begin{align*}
+\mathcal A_m(Y^j)
+&=
+4j(j-1)Y^{j-1}
++
+j(2-Y)Y^{j-1}
++
+mY^j
+\\
+&=
+\left(
+4j(j-1)+2j
+\right)Y^{j-1}
++
+(m-j)Y^j
+\\
+&=
+2j(2j-1)Y^{j-1}
++
+(m-j)Y^j.
+\end{align*}
+The formula for $j=0$ follows directly from
+\[
+\mathcal A_m(1)=m.
+\]
+\end{proof}
+
+We next record the matrix representation of $\mathcal A_m$ in the
+low-dimensional spaces needed below.
+
+\begin{lemma}[Matrix representation for degrees one, two, and three]
+\label{lem:Am-low-degree-matrices}
+With respect to the ordered monomial basis
+\[
+\set{1,Y,\ldots,Y^k},
+\]
+the restrictions
+\[
+\mathcal A_m^{(k)}
+:=
+\mathcal A_m\big|_{\mathbb P_k}
+\]
+are represented, for $k=1,2,3$, by the upper triangular matrices
+\begin{align}
+A_m^{(1)}
+&=
+\begin{pmatrix}
+m & 2\\
+0 & m-1
+\end{pmatrix},
+\label{eq:Am-matrix-k1}
+\\
+A_m^{(2)}
+&=
+\begin{pmatrix}
+m & 2 & 0\\
+0 & m-1 & 12\\
+0 & 0 & m-2
+\end{pmatrix},
+\label{eq:Am-matrix-k2}
+\\
+A_m^{(3)}
+&=
+\begin{pmatrix}
+m & 2 & 0 & 0\\
+0 & m-1 & 12 & 0\\
+0 & 0 & m-2 & 30\\
+0 & 0 & 0 & m-3
+\end{pmatrix}.
+\label{eq:Am-matrix-k3}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:Am-action-monomials},
+\begin{align*}
+\mathcal A_m(1)
+&=
+m,
+\\
+\mathcal A_m(Y)
+&=
+2+(m-1)Y,
+\\
+\mathcal A_m(Y^2)
+&=
+12Y+(m-2)Y^2,
+\\
+\mathcal A_m(Y^3)
+&=
+30Y^2+(m-3)Y^3.
+\end{align*}
+The displayed matrices follow by writing these expressions in the
+corresponding ordered monomial bases.
+\end{proof}
+
+\begin{proposition}[Invertibility of the reduced operator]
+\label{prop:Am-invertibility}
+Let $k\in\N\cup\{0\}$. The linear operator
+\[
+\mathcal A_m^{(k)}
+:
+\mathbb P_k\longrightarrow\mathbb P_k
+\]
+is invertible if and only if
+\begin{equation}\label{eq:Am-nonresonance}
+m\notin\set{0,1,\ldots,k}.
+\end{equation}
+More precisely,
+\begin{equation}\label{eq:det-Am-general}
+\det\mathcal A_m^{(k)}
+=
+\prod_{j=0}^k(m-j).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+By \eqref{eq:Am-action-monomials}, the matrix of
+$\mathcal A_m^{(k)}$ in the monomial basis is upper triangular, with
+diagonal entries
+\[
+m,m-1,\ldots,m-k.
+\]
+Its determinant is therefore
+\[
+\det\mathcal A_m^{(k)}
+=
+m(m-1)\cdots(m-k).
+\]
+Thus $\mathcal A_m^{(k)}$ is invertible precisely when none of the
+diagonal entries vanishes, which is equivalent to
+\eqref{eq:Am-nonresonance}.
+\end{proof}
+
+\begin{Corollary}[Polynomial solution of the reduced equation]
+\label{cor:reduced-polynomial-equation}
+Let $P\in\mathbb P_k$ and suppose that
+\[
+m\notin\set{0,\ldots,k}.
+\]
+Then there exists a unique $Q\in\mathbb P_k$ such that
+\begin{equation}\label{eq:reduced-polynomial-equation}
+\mathcal A_mQ=P.
+\end{equation}
+Consequently,
+\[
+V(t,x)
+:=
+-T^{-m}Q(Y)G(T,x)
+\]
+satisfies
+\begin{equation}\label{eq:reduced-profile-equation}
+(\partial_t-\partial_x^2)V
+=
+T^{-m-1}P(Y)G(T,x).
+\end{equation}
+\end{Corollary}
+
+\begin{proof}
+The existence and uniqueness of $Q$ follow from
+Proposition~\ref{prop:Am-invertibility}. Applying
+Lemma~\ref{lem:reduced-polynomial-operator} gives
+\[
+(\partial_t-\partial_x^2)
+\left[
+-T^{-m}Q(Y)G(T,x)
+\right]
+=
+T^{-m-1}(\mathcal A_mQ)(Y)G(T,x),
+\]
+which is \eqref{eq:reduced-profile-equation}.
+\end{proof}
+
+\begin{remark}[Backward substitution]
+\label{rem:Am-backward-substitution}
+Suppose that
+\[
+P(Y)=\sum_{j=0}^kp_jY^j,
+\qquad
+Q(Y)=\sum_{j=0}^kq_jY^j,
+\]
+and that $\mathcal A_mQ=P$. Then
+\begin{equation}\label{eq:Am-coefficient-system}
+(m-j)q_j
++
+2(j+1)(2j+1)q_{j+1}
+=
+p_j,
+\qquad
+0\le j\le k,
+\end{equation}
+where
+\[
+q_{k+1}:=0.
+\]
+Under the nonresonance condition
+\[
+m\notin\set{0,\ldots,k},
+\]
+the coefficients are determined recursively by
+\begin{equation}\label{eq:Am-backward-recursion}
+q_j
+=
+\frac{
+p_j-2(j+1)(2j+1)q_{j+1}
+}{
+m-j
+},
+\qquad
+j=k,k-1,\ldots,0.
+\end{equation}
+\end{remark}
+
+We now describe the contribution of the second time derivative. Define
+the first-order polynomial operator
+\begin{equation}\label{eq:def-Bm}
+\mathcal B_mP
+:=
+-mP-YP'
++
+\left(
+-\frac12+\frac Y4
+\right)P.
+\end{equation}
+Equation \eqref{eq:dt-gaussian-polynomial} becomes
+\begin{equation}\label{eq:dt-profile-Bm}
+\partial_t
+\left[
+T^{-m}P(Y)G(T,x)
+\right]
+=
+T^{-m-1}
+(\mathcal B_mP)(Y)G(T,x).
+\end{equation}
+
+Since multiplication by $Y$ can increase the degree by one,
+\[
+\mathcal B_m(\mathbb P_k)
+\subset
+\mathbb P_{k+1}.
+\]
+
+\begin{Definition}[Second-order polynomial operator]
+\label{def:tilde-Am}
+For $m\in\R$, define
+\begin{equation}\label{eq:def-tilde-Am}
+\widetilde{\mathcal A}_m
+:=
+\mathcal B_{m+1}\mathcal B_m.
+\end{equation}
+Then
+\[
+\widetilde{\mathcal A}_m
+:
+\mathbb P_k\longrightarrow\mathbb P_{k+2}.
+\]
+\end{Definition}
+
+\begin{lemma}[Second time derivative]
+\label{lem:second-time-derivative-polynomial}
+For every polynomial $P$,
+\begin{equation}\label{eq:second-time-derivative-profile}
+\partial_t^2
+\left[
+T^{-m}P(Y)G(T,x)
+\right]
+=
+T^{-m-2}
+(\widetilde{\mathcal A}_mP)(Y)G(T,x).
+\end{equation}
+Consequently,
+\[
+\partial_t^2\mathcal H_{m,k}
+\subset
+\mathcal H_{m+2,k+2}.
+\]
+\end{lemma}
+
+\begin{proof}
+Applying \eqref{eq:dt-profile-Bm} twice gives
+\begin{align*}
+\partial_t^2
+\left[
+T^{-m}P(Y)G(T,x)
+\right]
+&=
+\partial_t
+\left[
+T^{-m-1}(\mathcal B_mP)(Y)G(T,x)
+\right]
+\\
+&=
+T^{-m-2}
+\left[
+\mathcal B_{m+1}\mathcal B_mP
+\right](Y)G(T,x).
+\end{align*}
+The conclusion follows from
+\[
+\widetilde{\mathcal A}_m
+=
+\mathcal B_{m+1}\mathcal B_m
+\]
+and
+\[
+\widetilde{\mathcal A}_m(\mathbb P_k)
+\subset\mathbb P_{k+2}.
+\]
+\end{proof}
+
+\begin{lemma}[Explicit form of $\widetilde{\mathcal A}_m$]
+\label{lem:explicit-tilde-Am}
+For every polynomial $P$,
+\begin{align}
+\widetilde{\mathcal A}_mP
+={}&
+Y^2P''
++
+\left(
+(2m+3)Y-\frac{Y^2}{2}
+\right)P'
+\nonumber\\
+&+
+\left[
+(m+1)\left(m+\frac12\right)
+-
+\frac{2m+3}{4}Y
++
+\frac{Y^2}{16}
+\right]P.
+\label{eq:explicit-tilde-Am}
+\end{align}
+In particular,
+\[
+\deg(\widetilde{\mathcal A}_mP)
+\le
+\deg P+2.
+\]
+\end{lemma}
+
+\begin{proof}
+By definition,
+\[
+\mathcal B_mP
+=
+-\left(m+\frac12\right)P
+-YP'
++\frac Y4P.
+\]
+Set
+\[
+Q:=\mathcal B_mP.
+\]
+Then
+\[
+\widetilde{\mathcal A}_mP
+=
+\mathcal B_{m+1}Q
+=
+-\left(m+\frac32\right)Q
+-YQ'
++\frac Y4Q.
+\]
+Differentiating $Q$ and collecting the coefficients of
+$P''$, $P'$, and $P$ gives
+\eqref{eq:explicit-tilde-Am}.
+\end{proof}
+
+Combining the parabolic and second-order parts gives the exact action
+of the damped wave operator.
+
+\begin{proposition}[Damped wave operator on Gaussian--polynomial profiles]
+\label{prop:damped-wave-gaussian-polynomial}
+Let
+\[
+\mathcal L
+:=
+\partial_t^2+\partial_t-\partial_x^2.
+\]
+Then
+\begin{align}
+\mathcal L
+\left[
+T^{-m}P(Y)G(T,x)
+\right]
+={}&
+-T^{-m-1}
+(\mathcal A_mP)(Y)G(T,x)
+\nonumber\\
+&+
+T^{-m-2}
+(\widetilde{\mathcal A}_mP)(Y)G(T,x).
+\label{eq:damped-wave-polynomial-action}
+\end{align}
+Equivalently,
+\begin{equation}\label{eq:damped-wave-polynomial-action-factored}
+\mathcal L
+\left[
+T^{-m}P(Y)G(T,x)
+\right]
+=
+T^{-m-1}
+\left[
+-\mathcal A_mP
++
+T^{-1}\widetilde{\mathcal A}_mP
+\right](Y)
+G(T,x).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+By definition,
+\[
+\mathcal L
+=
+(\partial_t-\partial_x^2)+\partial_t^2.
+\]
+The conclusion follows by adding
+\eqref{eq:heat-operator-gaussian-polynomial} and
+\eqref{eq:second-time-derivative-profile}.
+\end{proof}
+
+\begin{remark}[Correct invariance statement]
+\label{rem:correct-gaussian-polynomial-invariance}
+The operator $\mathcal A_m$ preserves each polynomial space
+$\mathbb P_k$. By contrast,
+\[
+\widetilde{\mathcal A}_m(\mathbb P_k)
+\subset\mathbb P_{k+2},
+\]
+and the inclusion is generally strict.
+
+Thus the full damped wave operator does not preserve a fixed space
+$\mathcal H_{m,k}$. Instead, it satisfies the graded mapping property
+\[
+\mathcal L\mathcal H_{m,k}
+\subset
+\mathcal H_{m+1,k+2}.
+\]
+The leading term lies in $\mathcal H_{m+1,k}$ and is governed by
+$\mathcal A_m$, while the lower-order term lies in
+$\mathcal H_{m+2,k+2}$ and is governed by
+$\widetilde{\mathcal A}_m$.
+\end{remark}
+
+\begin{remark}[Resonant values]
+\label{rem:Am-resonant-values}
+If
+\[
+m\in\set{0,\ldots,k},
+\]
+then $\mathcal A_m^{(k)}$ is not invertible. For example,
+\[
+m=1,
+\qquad
+k=2,
+\]
+is resonant. Therefore an equation of the form
+\[
+\mathcal A_1Q=P,
+\qquad
+P\in\mathbb P_2,
+\]
+does not admit a polynomial solution for arbitrary $P$.
+
+This obstruction must be addressed by imposing a compatibility
+condition on $P$, by enlarging the class of profiles, or by introducing
+logarithmic terms. Thus a single profile of the form
+\[
+T^{-1}Q(Y)G(T,x)
+\]
+cannot, in general, remove an arbitrary forcing of the form
+\[
+T^{-2}P(Y)G(T,x).
+\]
+\end{remark}
+
+\begin{Example}[The residual generated by the heat kernel]
+\label{ex:heat-kernel-residual-polynomial}
+For $P=1$ and $m=0$, one has
+\[
+\partial_t^2G(T,x)
+=
+T^{-2}
+(\widetilde{\mathcal A}_0 1)(Y)G(T,x).
+\]
+By \eqref{eq:explicit-tilde-Am},
+\[
+\widetilde{\mathcal A}_0 1
+=
+\frac34-\frac34Y+\frac1{16}Y^2.
+\]
+Hence
+\[
+\partial_t^2G(T,x)
+=
+T^{-2}
+\left(
+\frac34-\frac34Y+\frac1{16}Y^2
+\right)
+G(T,x),
+\]
+which agrees with the direct computation
+\[
+\partial_t^2G(T,x)
+=
+G(T,x)
+\left(
+\frac{3}{4T^2}
+-\frac{3x^2}{4T^3}
++\frac{x^4}{16T^4}
+\right).
+\]
+\end{Example}
+
+
+
+\section{Auxiliary Lemmas}
+
+
+\begin{lemma}[Bounds for the Bessel quotient]
+\label{lem:lower-bound-Bessel-quotient}
+For every $\rho>0$,
+\[
+\frac{I_1(\rho/2)}{I_0(\rho/2)}
+\geq
+\frac{\rho}{2\left(1+\sqrt{1+\rho^2/4}\right)}.
+\]
+Moreover,
+\[
+0\leq
+1-\frac{I_1(\rho/2)}{I_0(\rho/2)}
+\leq\frac{2}{\rho}.
+\]
+\end{lemma}
+
+\begin{proof}
+Set $x=\rho/2$ and $r(x)=I_1(x)/I_0(x)$. From
+\[
+I_0'(x)=I_1(x),
+\qquad
+I_1'(x)=I_0(x)-\frac1xI_1(x),
+\]
+we obtain
+\begin{equation}\label{eq:Riccati-Bessel-quotient}
+r'(x)=1-\frac{r(x)}x-r(x)^2.
+\end{equation}
+Let
+\[
+g(x):=\frac{x}{1+\sqrt{1+x^2}}.
+\]
+Writing $s=\sqrt{1+x^2}$, one computes
+\[
+1-\frac{g(x)}x-g(x)^2-g'(x)
+=
+\frac{s-1}{s(s+1)}\geq0.
+\]
+Also,
+\[
+r(x)=\frac x2-\frac{x^3}{16}+O(x^5),
+\qquad
+g(x)=\frac x2-\frac{x^3}{8}+O(x^5).
+\]
+Thus $r>g$ near the origin. If a first contact $r(x_0)=g(x_0)$
+occurred, \eqref{eq:Riccati-Bessel-quotient} would give
+$(r-g)'(x_0)>0$, a contradiction. Hence $r\geq g$.
+
+The integral representations of $I_0$ and $I_1$ give
+$0\leq I_1/I_0\leq1$. In addition,
+\[
+\frac{x}{1+\sqrt{1+x^2}}\geq1-\frac1x,
+\qquad x>0.
+\]
+Therefore $0\leq1-r(x)\leq1/x$. Substituting $x=\rho/2$ proves the
+claim.
+\end{proof}
+
+
+\begin{lemma}
+\label{lem:positive-kernel-combination}
+Let
+\[
+K(s,z)=\frac12e^{-s/2}I_0\left(\frac{\rho(s,z)}2\right),
+\qquad
+\rho(s,z):=\sqrt{s^2-z^2},
+\]
+where $s>0$ and $|z|<s$. Then
+\[
+K(s,z)+2\partial_sK(s,z)
+\geq
+\frac{s}{s+2^2}K(s,z).
+\]
+\end{lemma}
+
+\begin{proof}
+Direct differentiation gives
+\[
+K(s,z)+2\partial_sK(s,z)
+=
+K(s,z)\frac{s}{\rho(s,z)}
+\frac{I_1(\rho(s,z)/2)}{I_0(\rho(s,z)/2)}.
+\]
+Lemma~\ref{lem:lower-bound-Bessel-quotient} implies
+\[
+K+2\partial_sK
+\geq
+K\frac{s}{2\left(1+\sqrt{1+\rho(s,z)^2/4}\right)}.
+\]
+Since
+\[
+2\left(1+\sqrt{1+\rho^2/4}\right)
+\leq2(2+s/2)=s+2^2,
+\]
+the conclusion follows.
+\end{proof}
+
+
+
+
+
+
+\end{document}

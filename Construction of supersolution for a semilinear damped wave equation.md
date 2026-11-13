@@ -2,7 +2,7 @@
 
 One-dimensional damped wave equation, $2\\lt p\\le 3$, negative total mass
 
-## 1. The problem
+## 1. The problem sd
 
 We study mild solutions of $\\partial_t^2u+\\partial_tu-\\partial_x^2u=|u|^p$ on $\\R$, with data $\\ep(u_0,u_1)$:
 
